@@ -1,7 +1,6 @@
 package com.project.todolist.domain;
 
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +12,6 @@ import java.util.Date;
 @Table(name = "task")
 @Getter
 @Setter
-@Builder
 public class Task {
 
     @Id
@@ -21,13 +19,12 @@ public class Task {
     private long id;
     private String content;
     private Date regdate;
-    private Date updatedDate;
-    private long taskOrder;
     private char status;
-    private int level;
+    private int impolevel;
+    private Date updateat;
 
     public Task(){
         regdate = new Date();
-        updatedDate = new Date();
+        updateat = new Date();
     }
 }
