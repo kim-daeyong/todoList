@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lagn="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -22,13 +22,28 @@
         </div>
     </div>
 
+    <form id="updatetodo"  action="#" >
+
     <div class="list-group" style="margin-bottom: 5%">
-        <a href="#" class="list-group-item list-group-item-action">First item</a>
-        <a href="#" class="list-group-item list-group-item-action">Second item</a>
-        <a href="#" class="list-group-item list-group-item-action">Third item</a>
+
+        <tr th:if="${#lists.isEmpty(getTasks)}">
+            <td colspan="4" style="text-align: center;">할일이 없습니다..</td>
+        </tr>
+
+        <tr th:if="${not #lists.isEmpty(getTasks)}" th:attrappend="id=${getTasks.id}" th:each="getTasks : ${getTasks}">
+            <td style ="vertical-align: middle;text-align: center;padding-right: 15%; width: 70%"><a  th:href="#" style="color:black;" ><span style=" font-size: large" th:value="${getTasks.id}" th:text="${getTasks.content}">content</span></a></td>
+            <td style="vertical-align: middle"><a href="javascript:void[0];" th:onclick= "'javascript:updatecontent('+${getTasks.id}+')'" ><span class ="css-xicon" name="updatecontent" id="updatecontent" th:value="${getTasks.id}" ></span></a></td>
+            <td style="vertical-align: middle"><a href="javascript:void[0];" th:onclick= "'javascript:deleteicon('+${getTasks.id}+')'" ><span class ="css-xicon" name="deleteicon" id="deleteiconid" th:value="${getTasks.id}" ></span></a></td>
+        </tr>
+
+        <div class="form-row" style ="float:right">
+            <div class="col">
+                <button  type="button" class="btn btn-primary" id="alldelete" name="deleteButton">전체 삭제</button>
+            </div>
+        </div>
     </div>
 
-
+    </form>
 
 </div>
 
