@@ -22,6 +22,17 @@
         </div>
     </div>
 
+    <div class="input-group mb-sm-1" style="width:70%; padding-top: 10px">
+        <div class="input-group-prepend">
+            <span class="input-group-text" for="listoption">정렬</span>
+        </div>
+        <select class="form-control" id="listoption">
+            <option value="default"  >우선순위</option>
+            <option value="findate" >완료시간</option>
+            <option value="status" >상태</option>
+        </select>
+    </div>
+
     <form id="updatetodo"  action="#" >
 
     <div class="container">
@@ -45,10 +56,14 @@
 <script>
 $(document).ready(function () {getTasks();});
 
+$('select').on('change', function(){
+    getTasksByOption();
+});
+
 function getTasks() {
 
         $.ajax({
-            url: "/todo/api/list",
+            url: "/todo/api/list/default" ,
             type: "GET",
             dataType: "json",
 
@@ -58,7 +73,7 @@ function getTasks() {
                     var tasklist = $('<ul class="list-group">'+
                         '<li class="list-group-item">'+
                             '<a href="javascript:void[0];">'+ list[i].content + '</a>' +
-                             '    ' +list[i].impolevel + '순위' +'   목표일:' + list[i].findate +
+                             '    ' +list[i].impolevel + '순위' +'   목표일:' + list[i].findate +'   상태:' + list[i].currentstatus +
                             '<button type="button" class="btn btn-warning" >수정</button>' +
                            ' <button type="button" class="btn btn-danger" >삭제</button>' +
                         '</li>'+
@@ -75,6 +90,47 @@ function getTasks() {
                 }
             }
         })
+
+}
+
+
+function getTasksByOption() {
+
+    var listoption = $('#listoption').val();
+
+    console.log(listoption)
+
+    $.ajax({
+        url: "/todo/api/list/" + listoption ,
+        type: "GET",
+        dataType: "json",
+
+        success: function (list) {
+
+            console.log(listoption)
+
+            for (var i = 0; i < list.length; i++) {
+
+                var tasklist = $('<ul class="list-group">'+
+                    '<li class="list-group-item">'+
+                    '<a href="javascript:void[0];">'+ list[i].content + '</a>' +
+                    '    ' +list[i].impolevel + '순위' +'   목표일:' + list[i].findate + '   상태:' + list[i].currentstatus +
+                    '<button type="button" class="btn btn-warning" >수정</button>' +
+                    ' <button type="button" class="btn btn-danger" >삭제</button>' +
+                    '</li>'+
+                    '</ul>');
+
+                tasklist.appendTo($('#tasklist'))
+            }
+        },
+        error: function (err) {
+            if (err.status === 400) {
+                alert("400");
+            } else if (err.status === 500) {
+                alert("500");
+            }
+        }
+    })
 
 }
 </script>

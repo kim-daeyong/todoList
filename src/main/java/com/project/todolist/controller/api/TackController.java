@@ -23,9 +23,21 @@ public class TackController {
     @Autowired
     TaskService taskService;
 
-    @GetMapping("/list")
+    @GetMapping("/list/default")
     public ResponseEntity getAllTasks(@Valid @ModelAttribute TaskDto taskDto) {
         List<Task> getTasks = taskService.getTasks();
+        return new ResponseEntity(getTasks, HttpStatus.OK);
+    }
+
+    @GetMapping("/list/findate")
+    public ResponseEntity getAllTasksByFindate(@Valid @ModelAttribute TaskDto taskDto) {
+        List<Task> getTasks = taskService.getTasksByFindate();
+        return new ResponseEntity(getTasks, HttpStatus.OK);
+    }
+
+    @GetMapping("/list/status")
+    public ResponseEntity getAllTasksByStatus(@Valid @ModelAttribute TaskDto taskDto) {
+        List<Task> getTasks = taskService.getTasksByStatus();
         return new ResponseEntity(getTasks, HttpStatus.OK);
     }
 

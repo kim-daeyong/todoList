@@ -18,7 +18,7 @@ public class Task {
     private long id;
     private String content;
     private Date regdate;
-    private char status;
+    private char currentstatus;
     private Date findate;
     private int impolevel;
     private Date updateat;

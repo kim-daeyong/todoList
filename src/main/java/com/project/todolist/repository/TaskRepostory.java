@@ -16,5 +16,15 @@ public interface TaskRepostory extends JpaRepository<Task, Long> {
     @Query("SELECT t FROM Task t ORDER BY t.impolevel ASC")
     public List<Task> getTaskByImpo();
 
+    // findate 순위로 정렬
+    @Query("SELECT t FROM Task t ORDER BY t.findate DESC")
+    public List<Task> getTaskByFindate();
+
+
+    // status 순위로 정렬
+    @Query("SELECT t FROM Task t ORDER BY t.currentstatus DESC")
+    public List<Task> getTaskByStatus();
+
+
 
 }

@@ -19,4 +19,14 @@ public class TaskServiceImpl implements TaskService {
     public List<Task> getTasks() {
         return taskRepostory.getTaskByImpo();
     }
+
+    @Override
+    public List<Task> getTasksByFindate() {
+        return taskRepostory.getTaskByFindate();
+    }
+
+    @Override
+    public List<Task> getTasksByStatus() {
+        return taskRepostory.getTaskByStatus();
+    }
 }
