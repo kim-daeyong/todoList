@@ -23,29 +23,60 @@
     </div>
 
     <form id="updatetodo"  action="#" >
+    <div class="container">=
 
-    <div class="list-group" style="margin-bottom: 5%">
-
-        <tr th:if="${#lists.isEmpty(getTasks)}">
-            <td colspan="4" style="text-align: center;">할일이 없습니다..</td>
-        </tr>
-
-        <tr th:if="${not #lists.isEmpty(getTasks)}" th:attrappend="id=${getTasks.id}" th:each="getTasks : ${getTasks}">
-            <td style ="vertical-align: middle;text-align: center;padding-right: 15%; width: 70%"><a  th:href="#" style="color:black;" ><span style=" font-size: large" th:value="${getTasks.id}" th:text="${getTasks.content}">content</span></a></td>
-            <td style="vertical-align: middle"><a href="javascript:void[0];" th:onclick= "'javascript:updatecontent('+${getTasks.id}+')'" ><span class ="css-xicon" name="updatecontent" id="updatecontent" th:value="${getTasks.id}" ></span></a></td>
-            <td style="vertical-align: middle"><a href="javascript:void[0];" th:onclick= "'javascript:deleteicon('+${getTasks.id}+')'" ><span class ="css-xicon" name="deleteicon" id="deleteiconid" th:value="${getTasks.id}" ></span></a></td>
-        </tr>
+        <div class="list-group">=
+            <div id="tasklist"></div>
+        </div>
+    </div>
 
         <div class="form-row" style ="float:right">
             <div class="col">
                 <button  type="button" class="btn btn-primary" id="alldelete" name="deleteButton">전체 삭제</button>
             </div>
         </div>
-    </div>
+
 
     </form>
 
 </div>
+
+<script>
+$(document).ready(function () {getTasks();});
+
+function getTasks() {
+
+        $.ajax({
+            url: "/todo/api/list",
+            type: "GET",
+            dataType: "json",
+
+            success: function (list) {
+                for (var i = 0; i < list.length; i++) {
+
+                    var tasklist = $('<ul class="list-group">'+
+                        '<li class="list-group-item">'+
+                            '<a href="javascript:void[0];">'+ list[i].content + '</a>'+
+                            '   우선순위: ' + list[i].impolevel + '   목표일:' + list[i].updateat +
+                            '<button type="button" class="btn btn-warning" >수정</button>' +
+                           ' <button type="button" class="btn btn-danger" >삭제</button>' +
+                        '</li>'+
+                    '</ul>');
+
+                    tasklist.appendTo($('#tasklist'))
+                }
+            },
+            error: function (err) {
+                if (err.status === 400) {
+                    alert("400");
+                } else if (err.status === 500) {
+                    alert("500");
+                }
+            }
+        })
+
+}
+</script>
 
 </body>
 </html>

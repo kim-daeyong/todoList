@@ -20,11 +20,13 @@ public class Task {
     private String content;
     private Date regdate;
     private char status;
+    private Date findate;
     private int impolevel;
     private Date updateat;
 
     public Task(){
         regdate = new Date();
         updateat = new Date();
+        findate = new Date();
     }
 }
