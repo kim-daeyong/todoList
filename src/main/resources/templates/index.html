@@ -23,9 +23,10 @@
     </div>
 
     <form id="updatetodo"  action="#" >
-    <div class="container">=
 
-        <div class="list-group">=
+    <div class="container">
+
+        <div class="list-group">
             <div id="tasklist"></div>
         </div>
     </div>
@@ -56,8 +57,8 @@ function getTasks() {
 
                     var tasklist = $('<ul class="list-group">'+
                         '<li class="list-group-item">'+
-                            '<a href="javascript:void[0];">'+ list[i].content + '</a>'+
-                            '   우선순위: ' + list[i].impolevel + '   목표일:' + list[i].updateat +
+                            '<a href="javascript:void[0];">'+ list[i].content + '</a>' +
+                             '    ' +list[i].impolevel + '순위' +'   목표일:' + list[i].findate +
                             '<button type="button" class="btn btn-warning" >수정</button>' +
                            ' <button type="button" class="btn btn-danger" >삭제</button>' +
                         '</li>'+
