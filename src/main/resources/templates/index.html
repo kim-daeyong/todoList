@@ -6,15 +6,19 @@
     <script src="/webjars/jquery/3.3.1-2/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
     <title>TodoList</title>
 </head>
 <body>
 
 <h1 style="text-align: center"> ToDo </h1>
 <div class="container" style="width:800px; border: 1px solid black; margin-top: 20px ">
+
+
     <div class="input-group mb-sm-1" style="padding-top: 10px">
         <div class="input-group-prepend">
-            <span class="input-group-text">입력</span>
+            <span class="input-group-text">todo</span>
         </div>
         <input type="text" class="form-control"  id="task" placeholder="오늘의 할일">
         <div class="input-group-append">
@@ -31,9 +35,60 @@
             <option value="findate" >완료시간</option>
             <option value="status" >상태</option>
         </select>
+        <div style="text-align: right">
+            <button  type="button" class="btn btn-success"data-toggle="modal" data-target="#addModal">할일 입력</button>
+        </div>
     </div>
 
-    <form id="updatetodo"  action="#" >
+    <form id="addTaskform"  action="#" >
+
+        <!-- The Modal -->
+        <div class="modal" id="addModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Task를 입력하세요</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="content">Task 내용:</label>
+                            <input type="text" class="form-control" id="content">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="impolevel">우선 순위:</label>
+                            <select class="form-control" id="impolevel">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+
+                        <div class = "form-group" style="padding-top: 5%;">
+                            <label for="findate">완료 날짜: </label>
+                                <input type="text" class="form-control" style="width: 30%" id="findate" th:name="findate" readonly>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button  type="button" class="btn btn-success" id="addTaskdata" onclick="addTask()" data-toggle="modal" data-target="#addModal">할일 입력</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+
+    <form id="updateTaskform"  action="#" >
 
     <div class="container">
 
@@ -61,7 +116,7 @@ $('select').on('change', function(){
 });
 
 function getTasks() {
-
+    $("#tasklist").empty();
         $.ajax({
             url: "/todo/api/list/default" ,
             type: "GET",
@@ -74,6 +129,7 @@ function getTasks() {
                         '<li class="list-group-item">'+
                             '<a href="javascript:void[0];">'+ list[i].content + '</a>' +
                              '    ' +list[i].impolevel + '순위' +'   목표일:' + list[i].findate +'   상태:' + list[i].currentstatus +
+                        ' <button type="button" class="btn btn-success" >완료</button>' +
                             '<button type="button" class="btn btn-warning" >수정</button>' +
                            ' <button type="button" class="btn btn-danger" >삭제</button>' +
                         '</li>'+
@@ -100,6 +156,7 @@ function getTasksByOption() {
 
     console.log(listoption)
 
+    $("#tasklist").empty();
     $.ajax({
         url: "/todo/api/list/" + listoption ,
         type: "GET",
@@ -115,6 +172,7 @@ function getTasksByOption() {
                     '<li class="list-group-item">'+
                     '<a href="javascript:void[0];">'+ list[i].content + '</a>' +
                     '    ' +list[i].impolevel + '순위' +'   목표일:' + list[i].findate + '   상태:' + list[i].currentstatus +
+                    ' <button type="button" class="btn btn-success" >완료</button>' +
                     '<button type="button" class="btn btn-warning" >수정</button>' +
                     ' <button type="button" class="btn btn-danger" >삭제</button>' +
                     '</li>'+
@@ -133,6 +191,79 @@ function getTasksByOption() {
     })
 
 }
+</script>
+
+
+
+
+
+<script>
+
+    var picker = new Pikaday({
+        field: document.getElementById('findate'),
+        format: 'yy-mm-dd',
+        toString(date, format) {
+            // you should do formatting based on the passed format,
+            // but we will just return 'D/M/YYYY' for simplicity
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
+            return `${year}-${month}-${day}`;
+        },
+        parse(dateString, format) {
+            const parts = dateString.split('-');
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10) - 1;
+            const year = parseInt(parts[2], 10);
+            return new Date(year, month, day);
+        }
+    });
+</script>
+
+<script>
+
+    function addTask() {
+
+        var taskdata = document.getElementById('addTaskform');
+        var content = taskdata.content.value;
+        var impolevel = taskdata.impolevel.value;
+        var findate = taskdata.findate.value;
+
+
+        console.log(content)
+        console.log(impolevel)
+        console.log(findate)
+
+        var data = {
+            "content"       : content,
+            "impolevel" : impolevel,
+            "findate" : findate,
+        }
+        var jsonData = JSON.stringify(data);
+
+        $.ajax({
+            url: "/todo/api/add",
+            type: "POST",
+            data : jsonData,
+            contentType : "application/json",
+
+            success: function (task) {
+
+                console.log(task)
+                getTasks();
+
+            },
+            error: function (err) {
+                if (err.status === 400) {
+                    alert("400");
+                } else if (err.status === 500) {
+                    alert("500");
+                }
+            }
+        })
+
+    }
+
 </script>
 
 </body>

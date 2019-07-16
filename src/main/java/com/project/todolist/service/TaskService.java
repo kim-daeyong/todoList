@@ -14,4 +14,6 @@ public interface TaskService {
     List<Task> getTasksByFindate();
 
     List<Task> getTasksByStatus();
+
+    void addTask(Task task);
 }

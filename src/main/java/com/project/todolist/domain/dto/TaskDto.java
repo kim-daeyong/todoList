@@ -15,12 +15,10 @@ import java.util.Date;
 @NoArgsConstructor
 public class TaskDto {
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd-hh")
-    private Date regdate;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd-hh")
+    private String content;
+    private int impolevel;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date findate;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd-hh")
-    private Date updateat;
 
 
 }

@@ -29,4 +29,9 @@ public class TaskServiceImpl implements TaskService {
     public List<Task> getTasksByStatus() {
         return taskRepostory.getTaskByStatus();
     }
+
+    @Override
+    public void addTask(Task task) {
+        taskRepostory.save(task);
+    }
 }
