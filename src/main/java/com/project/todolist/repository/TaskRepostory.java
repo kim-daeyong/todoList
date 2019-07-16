@@ -29,7 +29,7 @@ public interface TaskRepostory extends JpaRepository<Task, Long> {
 
     // findate가 지나가면 status를 실패로..
     @Modifying
-    @Query("UPDATE Task t SET t.currentstatus = '실패' WHERE t.findate < todayDate ")
+    @Query("UPDATE Task t SET t.currentstatus = '실패' WHERE t.currentstatus= '진행중' AND t.findate < todayDate ")
     public void updateStatus(@Param("date1") Date todayDate);
 
 
