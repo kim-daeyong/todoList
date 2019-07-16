@@ -7,6 +7,8 @@ import com.project.todolist.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -33,5 +35,11 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void addTask(Task task) {
         taskRepostory.save(task);
+    }
+
+    @Override
+    public void updateBookStatus(Date todayDate) {
+        taskRepostory.updateStatus(todayDate);
+
     }
 }
