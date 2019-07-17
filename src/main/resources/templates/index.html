@@ -131,7 +131,7 @@ function getTasks() {
                              '    ' +list[i].impolevel + '순위' +'   목표일:' + list[i].findate +'   상태:' + list[i].currentstatus +
                         ' <button type="button" class="btn btn-success" >완료</button>' +
                             '<button type="button" class="btn btn-warning" >수정</button>' +
-                           ' <button type="button" class="btn btn-danger" >삭제</button>' +
+                           ' <button type="button" id="deltaskid" th:value="${tasklist.id}" th:onclick="'javascript:deleteicon('+${tasklist.id}+')'" class="btn btn-danger" >삭제</button>' +
                         '</li>'+
                     '</ul>');
 
@@ -174,7 +174,7 @@ function getTasksByOption() {
                     '    ' +list[i].impolevel + '순위' +'   목표일:' + list[i].findate + '   상태:' + list[i].currentstatus +
                     ' <button type="button" class="btn btn-success" >완료</button>' +
                     '<button type="button" class="btn btn-warning" >수정</button>' +
-                    ' <button type="button" class="btn btn-danger" >삭제</button>' +
+                    ' <button type="button" id="deltaskid" onclick="delTask(deltaskid)" class="btn btn-danger" >삭제</button>' +
                     '</li>'+
                     '</ul>');
 
@@ -262,6 +262,37 @@ function getTasksByOption() {
             }
         })
 
+    }
+
+</script>
+
+<script>
+
+    function delTask(deltaskid) {
+
+        console.log(deltaskid);
+
+        var confirm_val = confirm("정말 삭제하시겠습니까?");
+        if (confirm_val) {
+            $.ajax({
+                url: '/todo/api/' + deltaskid,
+                method: 'delete',
+
+                success: function (task) {
+                    document.getElementById(deltaskid).remove();
+                    console.log(task)
+
+                },
+                error: function (err) {
+                    if (err.status === 400) {
+                        alert("400");
+                    } else if (err.status === 500) {
+                        alert("500");
+                    }
+                }
+            })
+
+        }
     }
 
 </script>

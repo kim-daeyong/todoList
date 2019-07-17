@@ -19,4 +19,6 @@ public interface TaskService {
     void addTask(Task task);
 
     void updateBookStatus(Date todayDate);
+
+    void delTask(long id);
 }

@@ -40,6 +40,10 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void updateBookStatus(Date todayDate) {
         taskRepostory.updateStatus(todayDate);
+    }
 
+    @Override
+    public void delTask(long id) {
+        taskRepostory.deleteById(id);
     }
 }
