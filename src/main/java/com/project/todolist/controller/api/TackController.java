@@ -53,10 +53,10 @@ public class TackController {
         return new ResponseEntity(task, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/{delTaskId}")
-    public ResponseEntity delTask(@RequestBody long id){
+    @DeleteMapping(value = "/{deltaskid}")
+    public ResponseEntity delTask(@PathVariable(value = "deltaskid") long id){
 
-
+        taskService.delTask(id);
         return new ResponseEntity(HttpStatus.OK);
     }
 
