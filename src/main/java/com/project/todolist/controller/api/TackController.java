@@ -60,5 +60,10 @@ public class TackController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @PutMapping(value = "/{uptaskid}")
+    public ResponseEntity updateTask(@PathVariable(value = "uptaskid") long id,  TaskDto taskDto){
+        taskService.delTask(id);
+        return new ResponseEntity(taskDto, HttpStatus.OK);
+    }
 
 }
