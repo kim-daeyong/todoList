@@ -32,5 +32,10 @@ public interface TaskRepostory extends JpaRepository<Task, Long> {
     @Query("UPDATE Task t SET t.currentstatus = '실패' WHERE t.currentstatus= '진행중' AND t.findate < todayDate ")
     public void updateStatus(@Param("date1") Date todayDate);
 
+    // task 수정
+    @Modifying
+    @Query("UPDATE Task t SET t.content WHERE t.id= :task.id AND t.findate < todayDate ")
+    public void updateTask(@Param("task") Task task);
+
 
 }

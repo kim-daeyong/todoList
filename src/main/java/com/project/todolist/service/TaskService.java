@@ -22,5 +22,7 @@ public interface TaskService {
 
     void delTask(long id);
 
-    void updateTask(long id);
+    void updateTask(Task task);
+
+    Task getTaskById(long id);
 }

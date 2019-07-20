@@ -61,9 +61,12 @@ public class TackController {
     }
 
     @PutMapping(value = "/{uptaskid}")
-    public ResponseEntity updateTask(@PathVariable(value = "uptaskid") long id,  TaskDto taskDto){
-        taskService.delTask(id);
-        return new ResponseEntity(taskDto, HttpStatus.OK);
+    public ResponseEntity updateTask(@PathVariable Long id, @RequestBody TaskDto taskDto){
+        Task task = taskService.getTaskById(id);
+        BeanUtils.copyProperties(taskDto, task);
+        taskService.updateTask(task);
+
+        return new ResponseEntity(task, HttpStatus.OK);
     }
 
 }
