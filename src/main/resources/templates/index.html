@@ -88,8 +88,6 @@
     </form>
 
 
-    <form id="updateTaskform"  action="#" >
-
     <div class="container">
 
         <div class="list-group">
@@ -102,6 +100,56 @@
                 <button  type="button" class="btn btn-primary" id="alldelete" name="deleteButton">전체 삭제</button>
             </div>
         </div>
+
+
+
+    <form id="updateTaskform"  action="#" >
+
+        <!-- The Modal -->
+        <div class="modal" id="updateModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Task를 입력하세요</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="content">Task 내용:</label>
+                            <input type="text" class="form-control" id="content">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="impolevel">우선 순위:</label>
+                            <select class="form-control" id="impolevel">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+
+                        <div class = "form-group" style="padding-top: 5%;">
+                            <label for="findate">완료 날짜: </label>
+                            <input type="text" class="form-control" style="width: 30%" id="findate" th:name="findate" readonly>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button  type="button" class="btn btn-success" id="updateTaskdata" onclick="updateTask('+list[i].id+')" data-toggle="modal" data-target="#addModal">할일 입력</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </form>
+
 
 
     </form>
@@ -130,7 +178,7 @@ function getTasks() {
                             '<a href="javascript:void[0];">'+ list[i].content + '</a>' +
                              '    ' +list[i].impolevel + '순위' +'   목표일:' + list[i].findate +'   상태:' + list[i].currentstatus +
                         ' <button type="button" class="btn btn-success" >완료</button>' +
-                            '<button type="button" class="btn btn-warning" >수정</button>' +
+                            '<button type="button" data-toggle="modal" data-target="#updateModal" class="btn btn-warning" >수정</button>' +
                            ' <button type="button"  id="'+list[i].id+'" onclick="delTask('+list[i].id+')" class="btn btn-danger" >삭제</button>' +
                         '</li>'+
                     '</ul>');
@@ -172,9 +220,9 @@ function getTasksByOption() {
                     '<li class="list-group-item" id="'+list[i].id+'">'+
                     '<a href="javascript:void[0];">'+ list[i].content + '</a>' +
                     '    ' +list[i].impolevel + '순위' +'   목표일:' + list[i].findate + '   상태:' + list[i].currentstatus +
-                    ' <button type="button" class="btn btn-success" >완료</button>' +
-                    '<button type="button" class="btn btn-warning" >수정</button>' +
-                    ' <button type="button" onclick="delTask('+list[i].id+')"  class="btn btn-danger" >삭제</button>' +
+                    '<button type="button" onclick="toggleTask('+list[i].id+')"  class="btn btn-success" >완료</button>' +
+                    '<button type="button" data-toggle="modal" data-target="#updateModal" class="btn btn-warning" >수정</button>' +
+                    '<button type="button" onclick="delTask('+list[i].id+')"  class="btn btn-danger" >삭제</button>' +
                     '</li>'+
                     '</ul>');
 
@@ -298,6 +346,54 @@ function getTasksByOption() {
             })
 
         }
+    }
+
+</script>
+
+<script>
+
+    function updateTask(deltaskid) {
+
+        console.log(deltaskid);
+
+        var taskdata = document.getElementById('updateTaskform');
+        var content = taskdata.content.value;
+        var impolevel = taskdata.impolevel.value;
+        var findate = taskdata.findate.value;
+
+
+        console.log(content)
+        console.log(impolevel)
+        console.log(findate)
+
+        var data = {
+            "content"       : content,
+            "impolevel" : impolevel,
+            "findate" : findate,
+        }
+        var jsonData = JSON.stringify(data);
+
+        $.ajax({
+            url: "/todo/api/add",
+            type: "POST",
+            data : jsonData,
+            contentType : "application/json",
+
+            success: function (task) {
+
+                console.log(task)
+                getTasks();
+
+            },
+            error: function (err) {
+                if (err.status === 400) {
+                    alert("400");
+                } else if (err.status === 500) {
+                    alert("500");
+                }
+            }
+        })
+
     }
 
 </script>
