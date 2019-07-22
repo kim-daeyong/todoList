@@ -119,13 +119,13 @@
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <label for="content">Task 내용:</label>
-                            <input type="text" class="form-control" id="content">
+                            <label for="upcontent">Task 내용:</label>
+                            <input type="text" class="form-control" id="upcontent">
                         </div>
 
                         <div class="form-group">
-                            <label for="impolevel">우선 순위:</label>
-                            <select class="form-control" id="impolevel">
+                            <label for="upimpolevel">우선 순위:</label>
+                            <select class="form-control" id="upimpolevel">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -133,8 +133,8 @@
                         </div>
 
                         <div class = "form-group" style="padding-top: 5%;">
-                            <label for="findate">완료 날짜: </label>
-                            <input type="text" class="form-control" style="width: 30%" id="findate" th:name="findate" readonly>
+                            <label for="upfindate">완료 날짜: </label>
+                            <input type="text" class="form-control" style="width: 30%" id="upfindate" th:name="findate" readonly>
                         </div>
                     </div>
 
@@ -352,14 +352,14 @@ function getTasksByOption() {
 
 <script>
 
-    function updateTask(deltaskid) {
+    function updateTask(updateid) {
 
-        console.log(deltaskid);
+        console.log(updateid);
 
         var taskdata = document.getElementById('updateTaskform');
-        var content = taskdata.content.value;
-        var impolevel = taskdata.impolevel.value;
-        var findate = taskdata.findate.value;
+        var content = taskdata.upcontent.value;
+        var impolevel = taskdata.upimpolevel.value;
+        var findate = taskdata.upfindate.value;
 
 
         console.log(content)
@@ -367,14 +367,14 @@ function getTasksByOption() {
         console.log(findate)
 
         var data = {
-            "content"       : content,
+            "content"   : content,
             "impolevel" : impolevel,
             "findate" : findate,
         }
         var jsonData = JSON.stringify(data);
 
         $.ajax({
-            url: "/todo/api/add",
+            url: "/todo/api/ " + updateid,
             type: "POST",
             data : jsonData,
             contentType : "application/json",
