@@ -59,7 +59,7 @@ public class TaskServiceImpl implements TaskService {
     public void updateTask(Task task) {
 
 
-        taskRepostory.updateTask(task);
+        taskRepostory.save(task);
     }
 
 
