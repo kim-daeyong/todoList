@@ -34,8 +34,8 @@ public interface TaskRepostory extends JpaRepository<Task, Long> {
 
     // task 수정
     @Modifying
-    @Query("UPDATE Task t SET t.content = :task.content, t.findate = :task.findate WHERE t.id= :task.id ")
-    public void updateTask(@Param("task") Task task);
+    @Query("UPDATE Task t SET t.content = :content, t.findate = :findate WHERE t.id= :id ")
+    public void updateTask(@Param("content") String content, @Param("findate") Date findate, @Param("id")long id);
 
 
 }

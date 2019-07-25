@@ -32,7 +32,7 @@ public class UpdateSyatusByFindate {
     @Scheduled(cron = "0 0 0 * * *")
     public void updateSyatusByFindate() {
         //상태를 변경해주기 위한 코드
-        taskService.updateBookStatus(todayDate);
+        taskService.updateTaskStatus(todayDate);
 
     }
 }

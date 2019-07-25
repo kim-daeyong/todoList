@@ -58,8 +58,11 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void updateTask(Task task) {
 
+        long id = task.getId();
+        String content = task.getContent();
+        Date findate = task.getFindate();
 
-        taskRepostory.save(task);
+        taskRepostory.updateTask(content, findate, id);
     }
 
 
