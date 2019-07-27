@@ -2,7 +2,9 @@ package com.project.todolist.controller.api;
 
 
 import com.project.todolist.domain.Task;
+import com.project.todolist.domain.TaskFolder;
 import com.project.todolist.domain.dto.TaskDto;
+import com.project.todolist.domain.dto.TaskFolderDto;
 import com.project.todolist.service.TaskService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,7 @@ public class TackController {
         return new ResponseEntity(getTasks, HttpStatus.OK);
     }
 
+    //todo > 생성 시 폴더의 이름을 넣는다.
     @PostMapping("/add")
     public ResponseEntity addTask(@RequestBody TaskDto taskDto) {
 
@@ -67,6 +70,28 @@ public class TackController {
         taskService.updateTask(task);
 
         return new ResponseEntity(task, HttpStatus.OK);
+    }
+
+
+    //todo index, 서비스, 레포짓 작성해야한다.
+    @PostMapping("/add/folder")
+    public ResponseEntity addFolder(@RequestBody TaskFolderDto taskFolderDto) {
+
+        TaskFolder taskFolder = new TaskFolder();
+//        BeanUtils.copyProperties(taskDto, task);
+        taskFolder.setFolderName(taskFolderDto.getFolderName());
+//        taskService.addTask(task);
+
+        return new ResponseEntity(taskFolder, HttpStatus.OK);
+    }
+
+
+    //todo index, 서비스, 레포짓 작성해야한다.
+    @GetMapping("/list/cate/default")
+    public ResponseEntity getAllTasks(@Valid @ModelAttribute TaskFolderDto taskFolderDto) {
+//        List<TaskFolder> getTaskFolders = taskService.getTasks();
+//        return new ResponseEntity(getTaskFolders, HttpStatus.OK);
+          return new ResponseEntity(HttpStatus.OK);
     }
 
 }
