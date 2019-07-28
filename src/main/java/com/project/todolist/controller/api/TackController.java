@@ -73,14 +73,14 @@ public class TackController {
     }
 
 
-    //todo index, 서비스, 레포짓 작성해야한다.
+    //todo index, 작성해야한다.
     @PostMapping("/add/folder")
     public ResponseEntity addFolder(@RequestBody TaskFolderDto taskFolderDto) {
 
         TaskFolder taskFolder = new TaskFolder();
-//        BeanUtils.copyProperties(taskDto, task);
+        BeanUtils.copyProperties(taskFolderDto, taskFolder);
         taskFolder.setFolderName(taskFolderDto.getFolderName());
-//        taskService.addTask(task);
+        taskService.addFolder(taskFolder);
 
         return new ResponseEntity(taskFolder, HttpStatus.OK);
     }

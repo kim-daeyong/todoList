@@ -2,6 +2,7 @@ package com.project.todolist.service;
 
 
 import com.project.todolist.domain.Task;
+import com.project.todolist.domain.TaskFolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -25,4 +26,6 @@ public interface TaskService {
     void updateTask(Task task);
 
     Task getTaskById(long id);
+
+    void addFolder(TaskFolder taskFolder);
 }

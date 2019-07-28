@@ -2,6 +2,8 @@ package com.project.todolist.service.Impl;
 
 
 import com.project.todolist.domain.Task;
+import com.project.todolist.domain.TaskFolder;
+import com.project.todolist.repository.TaskFolderRepository;
 import com.project.todolist.repository.TaskRepostory;
 import com.project.todolist.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,9 @@ public class TaskServiceImpl implements TaskService {
 
     @Autowired
     TaskRepostory taskRepostory;
+
+    @Autowired
+    TaskFolderRepository taskFolderRepository;
 
     @Override
     public List<Task> getTasks() {
@@ -63,6 +68,11 @@ public class TaskServiceImpl implements TaskService {
         Date findate = task.getFindate();
 
         taskRepostory.updateTask(content, findate, id);
+    }
+
+    @Override
+    public void addFolder(TaskFolder taskFolder) {
+        taskFolderRepository.save(taskFolder);
     }
 
 

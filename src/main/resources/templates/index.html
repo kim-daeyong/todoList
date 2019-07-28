@@ -192,7 +192,7 @@
 </div>
 
 <script>
-$(document).ready(function () {getTasks();});
+$(document).ready(function () {getTasks(); getTaskFolders()});
 
 $('select').on('change', function(){
     getTasksByOption();
@@ -258,6 +258,41 @@ function getTasksByOption() {
                     '<button type="button" onclick="toggleTask('+list[i].id+')"  class="btn btn-success" >완료</button>' +
                     '<button type="button" data-toggle="modal" data-target="#updateModal" class="btn btn-warning" >수정</button>' +
                     '<button type="button" onclick="delTask('+list[i].id+')"  class="btn btn-danger" >삭제</button>' +
+                    '</li>'+
+                    '</ul>');
+
+                tasklist.appendTo($('#tasklist'))
+            }
+        },
+        error: function (err) {
+            if (err.status === 400) {
+                alert("400");
+            } else if (err.status === 500) {
+                alert("500");
+            }
+        }
+    })
+
+}
+
+//수정 요함, task 오른쪽 정렬 예정
+function getTaskFolders() {
+    $("#tasklist").empty();
+    $.ajax({
+        url: "/todo/api/folder/" ,
+        type: "GET",
+        dataType: "json",
+
+        success: function (list) {
+            for (var i = 0; i < list.length; i++) {
+
+                var tasklist = $('<ul class="list-group">'+
+                    '<li class="list-group-item">'+
+                    '<a href="javascript:void[0];">'+ list[i].content + '</a>' +
+                    '    ' +list[i].impolevel + '순위' +'   목표일:' + list[i].findate +'   상태:' + list[i].currentstatus +
+                    ' <button type="button" class="btn btn-success" >완료</button>' +
+                    '<button type="button" data-toggle="modal" data-target="#updateModal" class="btn btn-warning" >수정</button>' +
+                    ' <button type="button"  id="'+list[i].id+'" onclick="delTask('+list[i].id+')" class="btn btn-danger" >삭제</button>' +
                     '</li>'+
                     '</ul>');
 
