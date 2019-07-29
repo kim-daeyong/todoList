@@ -281,7 +281,7 @@ function getTasksByOption() {
 
 //수정 요함, task 왼쪽 정렬 예정
 function getTaskFolders() {
-    $("#tasklist").empty();
+    $("#taskfolderlist").empty();
     $.ajax({
         url: "/todo/api/list/cate" ,
         type: "GET",
