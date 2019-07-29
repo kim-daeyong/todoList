@@ -87,7 +87,7 @@ public class TackController {
 
 
     //todo index, 서비스, 레포짓 작성해야한다.
-    @GetMapping("/list/cate/default")
+    @GetMapping("/list/cate")
     public ResponseEntity getAllTasks(@Valid @ModelAttribute TaskFolderDto taskFolderDto) {
 //        List<TaskFolder> getTaskFolders = taskService.getTasks();
 //        return new ResponseEntity(getTaskFolders, HttpStatus.OK);
