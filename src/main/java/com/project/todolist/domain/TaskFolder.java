@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,6 +19,10 @@ public class TaskFolder {
     private long id;
     private String foldername;
 
-    @OneToMany(mappedBy = "taskFolder")
-    private List<Task> tasks;
+//    @OneToMany(mappedBy = "taskfolder")
+//    private List<Task> tasks;
+//
+//    public TaskFolder(){
+//        tasks = new ArrayList<>();
+//    }
 }

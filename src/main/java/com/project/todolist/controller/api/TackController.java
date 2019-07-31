@@ -73,25 +73,25 @@ public class TackController {
     }
 
 
-    //todo index, 작성해야한다.
-    @PostMapping("/add/folder")
-    public ResponseEntity addFolder(@RequestBody TaskFolderDto taskFolderDto) {
+//    //todo index, 작성해야한다.
+//    @PostMapping("/add/folder")
+//    public ResponseEntity addFolder(@RequestBody TaskFolderDto taskFolderDto) {
+//
+//        TaskFolder taskFolder = new TaskFolder();
+//        BeanUtils.copyProperties(taskFolderDto, taskFolder);
+//        taskFolder.setFoldername(taskFolderDto.getFolderName());
+//        taskService.addFolder(taskFolder);
+//
+//        return new ResponseEntity(taskFolder, HttpStatus.OK);
+//    }
 
-        TaskFolder taskFolder = new TaskFolder();
-        BeanUtils.copyProperties(taskFolderDto, taskFolder);
-        taskFolder.setFoldername(taskFolderDto.getFolderName());
-        taskService.addFolder(taskFolder);
 
-        return new ResponseEntity(taskFolder, HttpStatus.OK);
-    }
-
-
-    //todo index, 서비스, 레포짓 작성해야한다.
-    @GetMapping("/list/cate")
-    public ResponseEntity getAllTasks(@Valid @ModelAttribute TaskFolderDto taskFolderDto) {
-//        List<TaskFolder> getTaskFolders = taskService.getTasks();
-//        return new ResponseEntity(getTaskFolders, HttpStatus.OK);
-          return new ResponseEntity(HttpStatus.OK);
-    }
+//    //todo index, 서비스, 레포짓 작성해야한다.
+//    @GetMapping("/list/cate")
+//    public ResponseEntity getAllTasks(@Valid @ModelAttribute TaskFolderDto taskFolderDto) {
+////        List<TaskFolder> getTaskFolders = taskService.getTasks();
+////        return new ResponseEntity(getTaskFolders, HttpStatus.OK);
+//          return new ResponseEntity(HttpStatus.OK);
+//    }
 
 }

@@ -37,7 +37,7 @@
         </select>
         <div style="text-align: right">
             <button  type="button" class="btn btn-success"data-toggle="modal" data-target="#addModal">할일 입력</button>
-            <button  type="button" class="btn btn-success"data-toggle="modal" data-target="#addFolderModal">카테고리 생성</button>
+            <!--<button  type="button" class="btn btn-success"data-toggle="modal" data-target="#addFolderModal">카테고리 생성</button>-->
         </div>
     </div>
 
@@ -88,45 +88,45 @@
 
     </form>
 
-    <form id="addTaskFolderform"  action="#" >
+    <!--<form id="addTaskFolderform"  action="#" >-->
 
-        <!-- The Modal -->
-        <div class="modal" id="addFolderModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">Task를 분류할 카테고리를 입력하세요</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
+        <!--&lt;!&ndash; The Modal &ndash;&gt;-->
+        <!--<div class="modal" id="addFolderModal">-->
+            <!--<div class="modal-dialog">-->
+                <!--<div class="modal-content">-->
+                    <!--&lt;!&ndash; Modal Header &ndash;&gt;-->
+                    <!--<div class="modal-header">-->
+                        <!--<h4 class="modal-title">Task를 분류할 카테고리를 입력하세요</h4>-->
+                        <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                    <!--</div>-->
 
-                    <!-- Modal body -->
-                    <div class="modal-body">
+                    <!--&lt;!&ndash; Modal body &ndash;&gt;-->
+                    <!--<div class="modal-body">-->
 
-                        <div class="form-group">
-                            <label for="content">카테고리 이름 : </label>
-                            <input type="text" class="form-control" id="catename">
-                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<label for="content">카테고리 이름 : </label>-->
+                            <!--<input type="text" class="form-control" id="catename">-->
+                        <!--</div>-->
 
-                    </div>
+                    <!--</div>-->
 
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button  type="button" class="btn btn-success" id="addTaskFolderdata" onclick="addTask()" data-toggle="modal" data-target="#addModal">생성</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
+                    <!--&lt;!&ndash; Modal footer &ndash;&gt;-->
+                    <!--<div class="modal-footer">-->
+                        <!--<button  type="button" class="btn btn-success" id="addTaskFolderdata" onclick="addTask()" data-toggle="modal" data-target="#addModal">생성</button>-->
+                        <!--<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>-->
+                    <!--</div>-->
 
-                </div>
-            </div>
-        </div>
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
-    </form>
+    <!--</form>-->
 
-    <div class="container">
-        <div class="list-group">
-            <div id="taskfolderlist"></div>
-        </div>
-    </div>
+    <!--<div class="container">-->
+        <!--<div class="list-group">-->
+            <!--<div id="taskfolderlist"></div>-->
+        <!--</div>-->
+    <!--</div>-->
 
     <div class="container">
         <div class="list-group">
@@ -196,7 +196,10 @@
 </div>
 
 <script>
-$(document).ready(function () {getTasks(); getTaskFolders()});
+$(document).ready(function () {getTasks();
+
+    // getTaskFolders();
+});
 
 $('select').on('change', function(){
     getTasksByOption();
@@ -279,6 +282,7 @@ function getTasksByOption() {
 
 }
 
+/*
 //수정 요함, task 왼쪽 정렬 예정
 function getTaskFolders() {
     $("#taskfolderlist").empty();
@@ -292,7 +296,7 @@ function getTaskFolders() {
 
                 var taskfolderlist = $('<ul class="list-group">'+
                     '<li class="list-group-item">'+
-                    '<a href="javascript:void[0];">'+ list[i].content + '</a>' +
+                    '<a href="javascript:void[0];">'+ list[i].foldername + '</a>' +
                     '</li>'+
                     '</ul>');
 
@@ -309,6 +313,7 @@ function getTaskFolders() {
     })
 
 }
+*/
 </script>
 
 

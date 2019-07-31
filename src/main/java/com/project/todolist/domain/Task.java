@@ -34,7 +34,7 @@ public class Task {
         findate = new Date();
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "taskfolder_id")
-    private TaskFolder taskFolder;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "taskfolder_id")
+//    private TaskFolder taskfolder;
 }
