@@ -79,7 +79,7 @@ public class TackController {
 
         TaskFolder taskFolder = new TaskFolder();
         BeanUtils.copyProperties(taskFolderDto, taskFolder);
-        taskFolder.setFolderName(taskFolderDto.getFolderName());
+        taskFolder.setFoldername(taskFolderDto.getFolderName());
         taskService.addFolder(taskFolder);
 
         return new ResponseEntity(taskFolder, HttpStatus.OK);

@@ -16,7 +16,7 @@ public class TaskFolder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String folderName;
+    private String foldername;
 
     @OneToMany(mappedBy = "taskFolder")
     private List<Task> tasks;
