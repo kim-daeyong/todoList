@@ -1,6 +1,7 @@
 package com.project.todolist.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "taskfolder")
+@Table(name = "taskfolders")
 @Getter
 @Setter
 public class TaskFolder {
@@ -19,10 +20,11 @@ public class TaskFolder {
     private long id;
     private String foldername;
 
-    @OneToMany(mappedBy = "taskfolder")
-    private List<Task> tasks;
-
-    public TaskFolder(){
-        tasks = new ArrayList<>();
-    }
+//    @OneToMany(mappedBy = "taskfolder")
+//    @JsonManagedReference
+//    private List<Task> tasks;
+//
+//    public TaskFolder(){
+//        tasks = new ArrayList<>();
+//    }
 }

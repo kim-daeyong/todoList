@@ -75,5 +75,8 @@ public class TaskServiceImpl implements TaskService {
         taskFolderRepository.save(taskFolder);
     }
 
-
+    @Override
+    public List<TaskFolder> getTaskfolders() {
+        return taskFolderRepository.findAll();
+    }
 }

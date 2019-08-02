@@ -9,7 +9,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "task")
+@Table(name = "tasks")
 @Getter
 @Setter
 public class Task {
@@ -34,7 +34,7 @@ public class Task {
         findate = new Date();
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "taskfolder_id")
-    private TaskFolder taskfolder;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "taskfolders_id")
+//    private TaskFolder taskfolder;
 }

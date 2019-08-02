@@ -28,4 +28,6 @@ public interface TaskService {
     Task getTaskById(long id);
 
     void addFolder(TaskFolder taskFolder);
+
+    List<TaskFolder> getTaskfolders();
 }
