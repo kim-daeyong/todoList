@@ -20,11 +20,11 @@ public class TaskFolder {
     private long id;
     private String foldername;
 
-//    @OneToMany(mappedBy = "taskfolder")
-//    @JsonManagedReference
-//    private List<Task> tasks;
-//
-//    public TaskFolder(){
-//        tasks = new ArrayList<>();
-//    }
+    @OneToMany(mappedBy = "taskfolder")
+    @JsonManagedReference
+    private List<Task> tasks;
+
+    public TaskFolder(){
+        tasks = new ArrayList<>();
+    }
 }

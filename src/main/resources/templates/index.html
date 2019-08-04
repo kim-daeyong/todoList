@@ -9,17 +9,29 @@
     <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
     <style>
-        #taskfolderlist{
-        width : 20%;
-        float : left;
-        text-align: left;
+        /*#taskfolderlist{*/
+        /*width : 20%;*/
+        /*float : left;*/
+        /*text-align: center;*/
 
+        /*}*/
+
+        /*#tasklist{*/
+            /*width : 80%;*/
+            /*float : left;*/
+            /*text-align: left;*/
+        /*}*/
+
+        nav, section {
+            float: left;
         }
-
-        #tasklist{
-            width : 80%;
-            float : left;
-            text-align: left;
+        nav {
+            background-color: goldenrod;
+            width: 20%;
+        }
+        section {
+            background-color: goldenrod;
+            width: 80%;
         }
     </style>
     <title>TodoList</title>
@@ -27,7 +39,7 @@
 <body>
 
 <h1 style="text-align: center"> ToDo </h1>
-<div class="container" style="width:800px; border: 1px solid black; margin-top: 20px ">
+<div class="container" style="width:90%; border: 1px solid black; margin-top: 20px ">
 
 
     <div class="input-group mb-sm-1" style="padding-top: 10px">
@@ -51,7 +63,7 @@
         </select>
         <div style="text-align: right">
             <button  type="button" class="btn btn-success"data-toggle="modal" data-target="#addModal">할일 입력</button>
-            <!--<button  type="button" class="btn btn-success"data-toggle="modal" data-target="#addFolderModal">카테고리 생성</button>-->
+            <button  type="button" class="btn btn-success"data-toggle="modal" data-target="#addFolderModal">폴더 생성</button>
         </div>
     </div>
 
@@ -136,22 +148,22 @@
 
     </form>
 <!--왼쪽정렬 -->
-    <div>
+    <nav>
         <div class="container">
             <div class="list-group">
                 <div id="taskfolderlist"></div>
             </div>
         </div>
 
-    </div>
+    </nav>
 <!--오른쪽 정렬-->
-    <div>
+    <section>
         <div class="container">
             <div class="list-group">
                 <div id="tasklist"></div>
             </div>
         </div>
-    </div>
+    </section>
         <div class="form-row" style ="float:right">
             <div class="col">
                 <button  type="button" class="btn btn-primary" id="alldelete" name="deleteButton">전체 삭제</button>
